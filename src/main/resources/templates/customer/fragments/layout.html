@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>Welcome to BakeyFlex</title>
+    <link rel="shortcut icon" href="customer/assets/images/favicon.png" type="image/x-icon">
+    
+
+    <link rel="stylesheet" href="customer/assets/css/icons.min.css">
+    <link rel="stylesheet" href="customer/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="customer/assets/css/animate.min.css">
+    <link rel="stylesheet" href="customer/assets/css/main.css">
+    <link rel="stylesheet" href="customer/assets/css/red-color.css">
+    <link rel="stylesheet" href="customer/assets/css/yellow-color.css">
+    <link rel="stylesheet" href="customer/assets/css/responsive.css">
+	  
+</head>
+
+<body>	
+	<div>
+		<div class="main-wrapper"> 
+			<div class="page-wrapper">
+				<div class="preloader">
+		            <div id="cooking">
+		                <div class="bubble"></div>
+		                <div class="bubble"></div>
+		                <div class="bubble"></div>
+		                <div class="bubble"></div>
+		                <div class="bubble"></div>
+		                <div id="area">
+		                    <div id="sides">
+		                        <div id="pan"></div>
+		                        <div id="handle"></div>
+		                    </div>
+		                    <div id="pancake">
+		                        <div id="pastry"></div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+				<th:block th:replace="customer/fragments/header :: header"/>
+				<th:block layout:fragment="content"/>    
+				<th:block th:replace="customer/fragments/footer :: footer"/>
+			</div>
+	  	</div> 
+	</div>
+  	
+  	<script src="customer/assets/js/jquery.min.js"></script>
+    <script src="customer/assets/js/bootstrap.min.js"></script>
+    <script src="customer/assets/js/plugins.js"></script>
+    <script src="customer/assets/js/main.js"></script>
+    
+</body>
+
+</html>
+

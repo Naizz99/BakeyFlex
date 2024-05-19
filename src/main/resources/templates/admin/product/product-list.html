@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+  <title>Product Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-th-list"></i> Product Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item active"><a href="/listProducts">Product List</a></li>
+	        </ul>
+	      </div>
+		
+		  <div class="row">
+	        <div class="col-md-12">
+	          <div class="tile">
+	            <h3 class="tile-title" style="margin:0px">
+	            	<a class="btn btn-secondary" type="button" th:href="@{/listProductTypes}">Product Types</a>
+	            </h3>
+	          </div>
+	        </div>
+	      </div>
+
+	      <div class="row">
+	        <div class="col-md-12">
+	          <div class="tile">
+	            <h3 class="tile-title">
+					<!--Inventories-->
+	            	<a class="btn btn-primary" type="button" th:href="@{/addProduct}">Add New</a>
+	            </h3>
+	            <div class="table-responsive table-sm table-hover table-bordered">
+	              <table class="table">
+	                <thead>
+	                  <tr>
+	                    <th>Image</th>
+	                    <th>Sereial No.</th>
+	                    <th>Name</th>
+	                    <th>Unit Price </th>
+	                    <th>Discount Rate</th>
+	                    <th>Recipe</th>
+	                    <th>Create Date</th>
+	                    <th>Status</th>
+	                    <th colspan="2">Action</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr th:each="product : ${listProducts}">
+	                  	<td>
+					    	<img th:src="(${product.image} != '')? ${product.image} : 'image/null-image.png'" th:alt="${product.productId}" width="80%" height="150px">
+					    </td>
+	                  	<td th:text="${product.productSerial != null} ? ${product.productSerial} : '-'">-</td>
+	                  	<td th:text="${product.productName != null} ? ${product.productName} : '-'">-</td>
+	                  	<td th:text="${product.unitPrice != null} ? ${product.unitPrice} : '-'">-</td>
+	                  	<td th:text="${product.discountRate != null} ? ${product.discountRate} : '-'">-</td>
+	                  	<td th:text="${product.recipeId != null} ? ${product.recipeId.recipeId} : '-'">-</td>
+	                  	<td th:text="${product.createDate != null} ? ${product.createDate} : '-'">-</td>
+	                  	<td th:text="${product.status != null} ? ${product.status} : '-'">-</td>
+	                  	<td th:onclick="|viewProductDetails('${product.productId}',this)|">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>						
+						</td>
+						<td th:onclick="|deleteProduct('${product.productId}',this)|">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> 
+						</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </main>	
+  	</div>
+</body>
+</html>
+
+<script src="admin/js/product.management.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+  <title>Recipe Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-th-list"></i> Recipe Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item active"><a href="/listRecipies">Recipies</a></li>
+	        </ul>
+	      </div>
+	      <div class="row">
+	        <div class="col-md-12">
+	          <div class="tile">
+	            <h3 class="tile-title">
+					<!--Inventories-->
+	            	<a class="btn btn-primary" type="button" th:href="@{/addRecipe}">Add New</a>
+	            </h3>
+	            <div class="table-responsive table-sm table-hover table-bordered">
+	              <table class="table">
+	                <thead>
+	                  <tr>
+						<th>image</th>
+	                    <th>Id</th>
+	                    <th>Description</th>
+	                    <th>Create Date</th>
+	                    <th>Status</th>
+	                    <th colspan="2">Action</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr th:each="recipe : ${listRecipies}">
+	                  	<td>
+							<img th:src="(${recipe.image} != '')? ${recipe.image} : 'image/null-image.png'" th:alt="${recipe.recipeId}" width="80%" height="150px">	  
+						</td>
+	                  	<td th:text="${recipe.recipeId != null} ? ${recipe.recipeId} : '-'">-</td>
+	                  	<td th:text="${recipe.description != null} ? 'Added' : '-'">-</td>
+	                  	<td th:text="${recipe.createDate != null} ? ${recipe.createDate} : '-'">-</td>
+	                  	<td th:text="${recipe.status != null} ? ${recipe.status} : '-'">-</td>
+	                  	<td th:onclick="|viewRecipeDetails('${recipe.recipeId}',this)|">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>						
+						</td>
+						<td th:onclick="|deleteRecipe('${recipe.recipeId}',this)|">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> 
+						</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </main>	
+  	</div>
+</body>
+</html>
+
+<script src="admin/js/recipe.management.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

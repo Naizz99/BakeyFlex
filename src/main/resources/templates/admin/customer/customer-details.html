@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+<title>Customer Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-edit"></i> Customer Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item"><a href="/listCustomers">Customer List</a></li>
+	          <li class="breadcrumb-item active"><a th:href="(${customer.customerId}==0)? '/addCustomer' : '/customerDetails?customerId='+${customer.customerId}">Customer</a></li>
+	        </ul>
+	      </div>
+
+	      <div class="row">
+	        <div class="col-lg-12 col-md-12 col-sm-12">
+	          <div class="tile">
+	            <form id = "newCustomer">
+					<div class="tile-body">
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-12 row">
+		              			<div style="width:100%;height:300px">
+		              				<img th:src="${customerProfile.profilePic}" width="100%" height="100%" alt="" >
+			              			<input type="file" accept="image/*" id="image" th:value="${customerProfile.profilePic}" hidden="">
+			              			<p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onClick="document.getElementById('image').click();">
+			              				<button class="btn btn-outline-primary" type="button">Change</button>
+			              			</p>
+		              			</div>
+		              		</div>
+		              		<div class="col-md-8 col-sm-12 row">
+		              			<div class="form-group col-2">
+				                  <label class="control-label">Id</label>
+				                  <input class="form-control" type="text" placeholder="CUSTOMER ID" id="customerId" th:value="${customer.customerId}" disabled>
+				                </div>
+				                <div class="form-group col-4">
+				                  <label class="control-label">Customer Code</label>
+				                  <input class="form-control" type="text" placeholder="CUSTOMER CODE" id="customerCode" th:value="${customer.customerCode}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">First Name</label>
+				                  <input class="form-control" type="text" placeholder="FIRST NAME" id="firstName" th:value="${customerUser.firstName}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">Middle Name</label>
+				                  <input class="form-control" type="text" placeholder="MIDDLE NAME" id="middleName" th:value="${customerUser.middleName}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">Last Name</label>
+				                  <input class="form-control" type="text" placeholder="LAST NAME" id="lastName" th:value="${customerUser.lastName}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">Mobile</label>
+				                  <input class="form-control" type="text" placeholder="MOBILE" id="mobile" th:value="${customerUser.mobile}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">Email</label>
+				                  <input class="form-control" type="email" placeholder="EMAIL" id="email" th:value="${customerUser.email}">
+				                </div>
+		              		</div>
+		              		<div class="col-md-6 col-sm-12 row">
+		              			<div class="form-group col-12">
+									<label class="control-label">Address Line 1</label>
+			                  		<input class="form-control" type="text" placeholder="ADDRESS LINE 1" id="addressLine1" th:value="${customer.addressLine1}">
+				                </div>
+				                <div class="form-group col-12">
+									<label class="control-label">Address Line 2</label>
+			                  		<input class="form-control" type="text" placeholder="ADDRESS LINE 2" id="addressLine2" th:value="${customer.addressLine2}">
+				                </div>
+				                <div class="form-group col-12">
+									<label class="control-label">Address Line 3</label>
+			                  		<input class="form-control" type="text" placeholder="ADDRESS LINE 3" id="addressLine3" th:value="${customer.addressLine3}">
+				                </div>
+				                <div class="form-group col-12">
+									<label class="control-label">Address Line 4</label>
+			                  		<input class="form-control" type="text" placeholder="ADDRESS LINE 4" id="addressLine4" th:value="${customer.addressLine4}">
+				                </div>
+		              		</div>
+		              		<div class="col-md-6 col-sm-12 row">
+		              			<div class="form-group col-12">
+				                  <label class="control-label">Gender</label>
+				                  <input class="form-control" type="text" placeholder="GENDER" id="gender" th:value="${customerUser.gender}">
+				                </div>
+				                <div class="form-group col-12">
+				                  <label class="control-label">BirthDay</label>
+				                  <input class="form-control" type="date" placeholder="BIRTHDAY" id="birthDay" th:value="${customerUser.birthDay}">
+				                </div>
+				                <div class="form-group col-12">
+				                  <label class="control-label">Username</label>
+				                  <input class="form-control" type="text" placeholder="USERNAME" id="username" th:value="${customerUser.username}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">Password</label>
+				                  <input class="form-control" type="password" placeholder="PASSWORD" id="password" th:value="${customerPassword.password}">
+				                </div>
+				                <div class="form-group col-6">
+				                  <label class="control-label">Confirm Password</label>
+				                  <input class="form-control" type="password" placeholder="RE-ENTER PASSWORD" id="confirmPassword">
+				                </div>
+		              		</div>
+		              		
+			                <div class="form-group col-md-6 col-sm-12">
+			                  <label class="control-label">Status</label>
+			                  <div class="row border border-danger">
+							  	<div class="col-md-4 col-sm-12" th:each="sts : ${T(com.naizzbakers.bms.model.User.STATUS).values()}">
+									<div class="form-check">
+					                	<label class="form-check-label">
+					                    	<input class="form-check-input" type="radio" th:value="${sts}" name="status" th:disabled="${customer.customerId} == 0">
+					                    	<span th:text="${sts}"></span>
+					                    </label>
+					                </div>
+								</div>
+							  </div>
+			                </div>
+			                <div class="form-group col-md-6 col-sm-12 row">
+								<div class="col-md-6 col-sm-12">
+				                  <label class="control-label">CreateBy</label>
+				                  <input class="form-control" type="text" placeholder="CREATED BY" th:value="${customerUser.createBy.firstName + ' ' + customerUser.createBy.lastName}" disabled=""> 
+				                  <input type="text" id="createBy" th:value="${customerUser.createBy.userId}" disabled="" hidden=""> 
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">Create Date</label>
+				                  <input class="form-control" type="text" placeholder="CREATED DATE" id="createDate" th:value="${customerUser.createDate}" disabled="">
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">UpdateBy</label>
+				                  <input class="form-control" type="text" placeholder="UPDATED BY" th:value="${customerUser.createBy.firstName + ' ' + customerUser.createBy.lastName}" disabled="">
+				                  <input type="text" id="updateBy" th:value="${customerUser.updateBy.userId}" disabled="" hidden="">
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">Update Date</label>
+				                  <input class="form-control" type="text" placeholder="UPDATED DATE" id="updateDate" th:value="${customerUser.updateDate}" disabled="">
+				                </div>
+							</div>
+		              	</div>
+		            </div>
+				</form>
+				
+	            <div class="tile-footer">
+	              <button class="btn btn-primary" type="button" id="saveCustomer"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;
+	              <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	            </div>
+	          </div>
+	        </div>
+	        
+	    </main>	
+	</div>
+</body>
+</html>
+
+<script src="admin/js/customer.management.js"></script>

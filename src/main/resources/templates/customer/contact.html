@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/fragments/layout}">
+
+<head>
+    <title>Contact Us</title>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main>
+			<section>
+	            <div class="block less-spacing gray-bg top-padd30">
+	                
+	                    <div class="container">
+	                        <div class="row">
+	                            
+	                            <div class="col-md-12 col-sm-12 col-lg-12">
+	                                <div class="sec-box">
+	                                <div class="loc-map" id="loc-map"></div>
+	                                <div class="contact-info-sec text-center">
+	                                    <div class="row">
+	                                        <div class="col-md-4 col-sm-4 col-lg-4">
+	                                            <div class="contact-info-box">
+	                                                <i class="fa fa-phone-square"></i>
+	                                                <h5 itemprop="headline">PHONE</h5>
+	                                                <p itemprop="description">Phone 01: (+94) 78 9241423</p>
+	                                                <p itemprop="description">Phone 02: (+94) 77 5676543</p>
+	                                            </div>
+	                                        </div>
+	                                        <div class="col-md-4 col-sm-4 col-lg-4">
+	                                            <div class="contact-info-box">
+	                                                <i class="fa fa-map-marker"></i>
+	                                                <h5 itemprop="headline">ADDRESS</h5>
+	                                                <p itemprop="description">243/1A, Jaya Mawatha, Weniwelkola, Polgasowita</p>
+	                                            </div>
+	                                        </div>
+	                                        <div class="col-md-4 col-sm-4 col-lg-4">
+	                                            <div class="contact-info-box">
+	                                                <i class="fa fa-envelope"></i>
+	                                                <h5 itemprop="headline">EMAIL</h5>
+	                                                <p itemprop="description">support@bakeyflex.com</p>
+	                                                <p itemprop="description">hello@bakeyflex.com</p>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="contact-form-wrapper text-center">
+	                                    <div class="contact-form-inner">
+	                                        <h3 itemprop="headline">Contact Us</h3>
+	                                        <div id="message"></div>
+	                                        <form method="post" action="https://html.webinane.com/food-chow/contact.php" id="contactform">
+	                                            <div class="row">
+	                                                <div class="col-md-12 col-sm-6 col-lg-12">
+	                                                    <input id="name" type="text" placeholder="Your Name">
+	                                                </div>
+	                                                <div class="col-md-12 col-sm-6 col-lg-12">
+	                                                    <input id="email" type="email" placeholder="Your Email">
+	                                                </div>
+	                                                <div class="col-md-12 col-sm-12 col-lg-12">
+	                                                    <input type="text" placeholder="Subject">
+	                                                </div>
+	                                                <div class="col-md-12 col-sm-12 col-lg-12">
+	                                                    <textarea id="comments" placeholder="Message"></textarea>
+	                                                </div>
+	                                                <div class="col-md-12 col-sm-12 col-lg-12">
+	                                                    <button class="brd-rd2" id="submit" type="submit">SEND MESSAGE</button>
+	                                                    <img src="assets/images/ajax-loader.gif" class="loader" alt="ajax-loader.gif" itemprop="image">
+	                                                </div>
+	                                            </div>
+	                                        </form>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	    </main>
+	</div>
+</body>	
+</html>

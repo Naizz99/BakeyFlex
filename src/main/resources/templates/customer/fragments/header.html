@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="header">
+		<header class="stick">
+            <div class="topbar">
+                <div class="container-fluid">
+                    <div class="topbar-register">
+                        <a class="log-popup-btn" href="/customer/login" title="Login" itemprop="url">LOGIN</a> / <a class="sign-popup-btn" href="/customer/register" title="Register" itemprop="url">REGISTER</a>
+                    </div>
+                    <div class="social1">
+                        <a href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                        <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>                
+            </div>
+            <div class="logo-menu-sec">
+                <div class="container-fluid">
+                    <div class="logo"><h1 itemprop="headline"><a href="/index" title="Home" itemprop="url"><img src="customer/assets/images/logo.png" alt="logo.png" itemprop="image" width="129" height="100"></a></h1></div>
+                    <nav>
+                        <div class="menu-sec">
+                            <ul >
+                                <li><a href="/menu" title="MENU" itemprop="url"><span class="red-clr">Explore</span>Menu</a></li>
+                                <li><a href="/order" title="ONLINE ORDERING" itemprop="url"><span class="red-clr">Your Favorites</span>Online Ordering</a></li>
+                                <li><a href="/deals" title="SPECIALS OR DEALS" itemprop="url"><span class="red-clr">Discover</span>Specials or Deals</a></li>
+                                <li><a href="/blog" title="BLOGS" itemprop="url"><span class="red-clr">Bite-Sized Stories</span>Blogs</a></li>
+                                <li><a href="/gallery" title="BLOGS" itemprop="url"><span class="red-clr">Captured Sweet Moments</span>Gallery</a></li>
+                                <li><a href="/about-us" title="ABOUT US" itemprop="url"><span class="red-clr">Behind the Flavors</span>About Us</a></li>
+                                <li><a href="/contact" title="CONTACT US" itemprop="url"><span class="red-clr">Reach Out to Us</span>Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="responsive-header">
+            <div class="responsive-logomenu">
+                <div class="logo"><h1 itemprop="headline"><a href="index.html" title="Home" itemprop="url"><img src="customer/assets/images/logo.png" alt="logo.png" itemprop="image"></a></h1></div>
+                <span class="menu-btn yellow-bg brd-rd4"><i class="fa fa-align-justify"></i></span>
+            </div>
+            <div class="responsive-menu">
+                <span class="menu-close red-bg brd-rd3"><i class="fa fa-close"></i></span>
+                <div class="menu-lst">
+                    <ul>
+                        <li><a href="menu.html" title="MENU" itemprop="url"><span class="yellow-clr">Explore</span>Menu</a></li>
+                        <li><a href="contact.html" title="ONLINE ORDERING" itemprop="url"><span class="yellow-clr">Your Favorites</span>Online Ordering</a></li>
+                        <li><a href="#" title="SPECIALS OR DEALS" itemprop="url"><span class="yellow-clr">Discover</span>Specials or Deals</a></li>
+                        <li><a href="blog.html" title="BLOGS" itemprop="url"><span class="red-clr">Bite-Sized Stories</span>Blogs</a></li>
+                        <li><a href="gallery.html" title="BLOGS" itemprop="url"><span class="red-clr">Captured Sweet Moments</span>Gallery</a></li>
+                        <li><a href="about-us.html" title="ABOUT US" itemprop="url"><span class="yellow-clr">Behind the Flavors</span>About Us</a></li>
+                        <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="yellow-clr">Reach Out to Us</span>Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="topbar-register">
+                    <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
+                </div>
+                <div class="social1">
+                    <a href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                    <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
+                </div>
+            </div>
+        </div>
+	</th:block>
+</body>	
+</html>

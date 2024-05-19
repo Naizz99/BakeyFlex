@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/fragments/layout}">
+<head>
+	<title>404</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+    	<main>
+	        <section>
+	            <div class="block">
+	                <div style="background-image: url(assets/images/topbg.jpg);" class="fixed-bg"></div>
+	                <div class="error-page-wrapper text-center">
+	                    <div class="error-page-inner">
+	                        <h1 itemprop="headline">404 <span class="red-clr">Error</span></h1>
+	                        <h4 itemprop="headline"><span class="yellow-clr">Oops,</span> This Page Not Found!</h4>
+	                        <a class="brd-rd2 yellow-bg" href="/index" title="" itemprop="url"><i class="fa fa-home"></i> BACK TO HOME</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	    </main>
+    </div>
+</body>	
+</html>

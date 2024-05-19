@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+<title>Product Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-edit"></i> Product Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item"><a href="/listProducts">Product List</a></li>
+	          <li class="breadcrumb-item active"><a th:href="(${product.productId}==0)? '/addProduct' : '/productDetails?productId='+${product.productId}">Product</a></li>
+	        </ul>
+	      </div>
+
+	      <div class="row">
+	        <div class="col-lg-12 col-md-12 col-sm-12">
+	          <div class="tile">
+	            <form id = "newProduct" th:object="${product}">
+					<div class="tile-body">
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-12">
+		              			<img th:src="${product.image}" alt="" width="100%" height="300px">
+		              			<input type="file" accept="image/*" id="image" th:value="${product.image}" hidden="">
+		              			<p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onClick="document.getElementById('image').click();">
+		              				<button class="btn btn-outline-primary" type="button">Change</button>
+		              			</p>
+		              			<hr>
+		              		</div>
+		              		<div class="col-md-8 col-sm-12 row">
+		              			<div class="col-md-6 col-sm-12 row">
+		              				<div class="form-group col-3">
+					                  <label class="control-label">Id</label>
+					                  <input class="form-control" type="text" placeholder="PRODUCT ID" id="productId" th:field="*{productId}" th:value="${product.productId}" disabled>
+					                </div>
+					                <div class="form-group col-9">
+					                  <label class="control-label">Sereial Number</label>
+					                  <input class="form-control" type="text" placeholder="SERIAL NUMBER" id="productSerial" th:field="*{productSerial}" th:value="${product.productSerial}">
+					                </div>
+					                <div class="form-group col-12">
+					                  <label for="productType" class="control-label">Product Type</label>
+									  <select class="form-control" th:field="*{productType}" th:value="${product.productType}" id="productType">
+				                           <option value=''>-- PRODUCT TYPE --</option>
+				                           <option th:each="type:${productTypeList}"
+				                                   th:value="${type.ptId}"
+				                                   th:text="${type.productTypeName}">
+				                           </option>
+				                      </select> 
+					                </div>
+					                <div class="form-group col-12">
+					                  <label class="control-label">Unit Price</label>
+					                  <input class="form-control" type="text" placeholder="UNIT PRICE" id="unitPrice" th:field="*{unitPrice}" th:value="${product.unitPrice}">
+					                </div>
+		              			</div>
+		              			<div class="col-md-6 col-sm-12 row">
+		              				<div class="form-group col-12">
+					                  <label class="control-label">Name</label>
+					                  <input class="form-control" type="text" placeholder="PRODUCT NAME" id="productName" th:field="*{productName}" th:value="${product.productName}">
+					                </div>
+					                <div class="form-group col-11">
+					                  <label for="recipeId" class="control-label">Recipe</label>
+									  <div class="row">
+										  <div class="col-10">
+											  <select class="form-control" th:field="*{recipeId}" th:value="${product.recipeId}" id="recipeId">
+						                           <option value=''>-- RECIPE --</option>
+						                           <option th:each="recipe:${recipeList}"
+						                                   th:value="${recipe.recipeId}"
+						                                   th:text="${recipe.recipeId}">
+						                           </option>
+						                      </select>
+										  </div>
+										  <div class="col-1">
+											  <a href="/addRecipe" class="btn btn-outline-primary" type="button">+</a>
+										  </div>
+									  </div> 
+					                </div>
+					                <div class="form-group col-12">
+					                  <label class="control-label">Discount Rate</label>
+					                  <input class="form-control" type="text" placeholder="DISCOUNT RATE" id="discountRate" th:field="*{discountRate}" th:value="${product.discountRate}">
+					                </div>
+		              			</div>
+		              		</div>
+		              		<div class="col-md-12 col-sm-12 row">
+							    <div class="form-group col-12">
+				                  <label class="control-label">SHORT DESCRIPTION</label>
+				                  <textarea class="form-control" type="text" placeholder="SHORT DESCRIPTION" id="shortDescription" th:field="*{shortDescription}" th:value="${product.shortDescription}"></textarea>
+				                </div>
+								<div class="col-md-12 col-sm-12 row">
+		              				<div class="form-group col-12">
+										<label class="control-label">LONG DESCRIPTION</label>
+				                  		<textarea class="form-control" type="text" placeholder="LONG DESCRIPTION" id="longDescription" th:field="*{longDescription}" th:value="${product.longDescription}"></textarea>
+					                </div>
+				                </div>  
+						    </div>
+			                <div class="form-group col-md-10 col-sm-12">
+			                  <label class="control-label">Status</label>
+			                  <div class="row border border-danger">
+							  	<div class="col-md-2 col-sm-12" th:each="sts : ${T(com.naizzbakers.bms.model.Product.STATUS).values()}">
+									<div class="form-check">
+					                	<label class="form-check-label">
+					                    	<input class="form-check-input" type="radio" th:field="*{status}" th:value="${sts}" name="status" th:disabled="${product.productId} == 0">
+					                    	<span th:text="${sts}"></span>
+					                    </label>
+					                </div>
+								</div>
+							  </div>
+			                </div>
+			                <div class="form-group col-md-6 col-sm-12">
+			                  <label class="control-label">Special Note</label>
+			                  <textarea class="form-control" rows="4" placeholder="SPECIAL NOTE" id="specialNote" th:field="*{specialNote}" th:value="${product.specialNote}"></textarea>
+			                </div>
+			                <div class="form-group col-md-6 col-sm-12 row">
+								<div class="col-md-6 col-sm-12">
+				                  <label class="control-label">CreateBy</label>
+				                  <input class="form-control" type="text" placeholder="CREATED BY" th:value="${product.createBy.firstName + ' ' + product.createBy.lastName}" disabled=""> 
+				                  <input type="text" th:field="*{createBy}" disabled="" hidden=""> 
+				                  <input type="text" id="createBy" th:value="${product.createBy.userId}" disabled="" hidden=""> 
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">Create Date</label>
+				                  <input class="form-control" type="text" placeholder="CREATED DATE" id="createDate" th:field="*{createDate}" th:value="${product.createDate}" disabled="">
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">UpdateBy</label>
+				                  <input class="form-control" type="text" placeholder="UPDATED BY" th:value="${product.createBy.firstName + ' ' + product.createBy.lastName}" disabled="">
+				                  <input type="text" th:field="*{updateBy}" disabled="" hidden="">
+				                  <input type="text" id="updateBy" th:value="${product.updateBy.userId}" disabled="" hidden="">
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">Update Date</label>
+				                  <input class="form-control" type="text" placeholder="UPDATED DATE" id="updateDate" th:field="*{updateDate}" th:value="${product.updateDate}" disabled="">
+				                </div>
+							</div>
+		              	</div>
+		            </div>
+				</form>
+				
+	            <div class="tile-footer">
+	              <button class="btn btn-primary" type="button" id="saveProduct"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;
+	              <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	            </div>
+	          </div>
+	        </div>
+	        
+	    </main>	
+	</div>
+</body>
+</html>
+
+<script src="admin/js/product.management.js"></script>

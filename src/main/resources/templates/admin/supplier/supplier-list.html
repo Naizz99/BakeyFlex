@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+  <title>Supplier Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-th-list"></i> Supplier Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item active"><a href="/listSuppliers">Supplier List</a></li>
+	        </ul>
+	      </div>
+	      <div class="row">
+	        <div class="col-md-12">
+	          <div class="tile">
+	            <h3 class="tile-title">
+					<!--Inventories-->
+	            	<a class="btn btn-primary" type="button" th:href="@{/addSupplier}">Add New</a>
+	            </h3>
+	            <div class="table-responsive table-sm table-hover table-bordered">
+	              <table class="table">
+	                <thead>
+	                  <tr>
+	                    <th>Id</th>
+	                    <th>Sereial No.</th>
+	                    <th>Name</th>
+	                    <th>Contact Person</th>
+	                    <th colspan="2">Mobile</th>
+	                    <th>Email</th>
+	                    <th>Create Date</th>
+	                    <th>Status</th>
+	                    <th colspan="2">Action</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr th:each="supplier : ${listSuppliers}">
+	                  	<td th:text="${supplier.supplierId != null} ? ${supplier.supplierId} : '-'">-</td>
+	                  	<td th:text="${supplier.supplierSerial != null} ? ${supplier.supplierSerial} : '-'">-</td>
+	                  	<td th:text="${supplier.supplierName != null} ? ${supplier.supplierName} : '-'">-</td>
+	                  	<td th:text="${supplier.contactPerson != null} ? ${supplier.contactPerson} : '-'">-</td>
+	                  	<td th:text="${supplier.mobile1 != null} ? ${supplier.mobile1} : '-'">-</td>
+	                  	<td th:text="${supplier.mobile2 != null} ? ${supplier.mobile2} : '-'">-</td>
+	                  	<td th:text="${supplier.email != null} ? ${supplier.email} : '-'">-</td>
+	                  	<td th:text="${supplier.createDate != null} ? ${supplier.createDate} : '-'">-</td>
+	                  	<td th:text="${supplier.status != null} ? ${supplier.status} : '-'">-</td>
+	                  	<td th:onclick="|viewSupplierDetails('${supplier.supplierId}',this)|">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>						
+						</td>
+						<td th:onclick="|deleteSupplier('${supplier.supplierId}',this)|">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> 
+						</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </main>	
+  	</div>
+</body>
+</html>
+
+<script src="admin/js/supplier.management.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

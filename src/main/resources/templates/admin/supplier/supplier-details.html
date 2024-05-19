@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+<title>Supplier Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-edit"></i> Supplier Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item"><a href="/listSuppliers">Supplier List</a></li>
+	          <li class="breadcrumb-item active"><a th:href="(${supplier.supplierId}==0)? '/addSupplier' : '/supplierDetails?supplierId='+${supplier.supplierId}">Supplier</a></li>
+	        </ul>
+	      </div>
+
+	      <div class="row">
+	        <div class="col-lg-12 col-md-12 col-sm-12">
+	          <div class="tile">
+	            <form id = "newSupplier" th:object="${supplier}">
+					<div class="tile-body">
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-12">
+		              			<img th:src="${supplier.image}" alt="" width="100%" height="300px">
+		              			<input type="file" accept="image/*" id="image" th:value="${supplier.image}" hidden="">
+		              			<p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onClick="document.getElementById('image').click();">
+		              				<button class="btn btn-outline-primary" type="button">Change</button>
+		              			</p>
+		              		</div>
+		              		<div class="col-md-8 col-sm-12 row">
+		              			<div class="col-md-6 col-sm-12 row">
+		              				<div class="form-group col-3">
+					                  <label class="control-label">Id</label>
+					                  <input class="form-control" type="text" placeholder="SUPPLIER ID" id="supplierId" th:field="*{supplierId}" th:value="${supplier.supplierId}" disabled>
+					                </div>
+					                <div class="form-group col-9">
+					                  <label class="control-label">Sereial Number</label>
+					                  <input class="form-control" type="text" placeholder="SERIAL NUMBER" id="supplierSerial" th:field="*{supplierSerial}" th:value="${supplier.supplierSerial}">
+					                </div>
+					                <div class="form-group col-12">
+					                  <label class="control-label">Contact Person</label>
+					                  <input class="form-control" type="text" placeholder="CONTACT PERSON" id="contactPerson" th:field="*{contactPerson}" th:value="${supplier.contactPerson}">
+					                </div>
+					                <div class="form-group col-12">
+					                  <label class="control-label">Mobile 1</label>
+					                  <input class="form-control" type="text" placeholder="MOBILE 1" id="mobile1" th:field="*{mobile1}" th:value="${supplier.mobile1}">
+					                </div>
+		              			</div>
+		              			<div class="col-md-6 col-sm-12 row">
+		              				<div class="form-group col-12">
+					                  <label class="control-label">Name</label>
+					                  <input class="form-control" type="text" placeholder="SUPPLIER NAME" id="supplierName" th:field="*{supplierName}" th:value="${supplier.supplierName}">
+					                </div>
+					                <div class="form-group col-12">
+					                  <label class="control-label">Email</label>
+					                  <input class="form-control" type="text" placeholder="EMAIL" id="email" th:field="*{email}" th:value="${supplier.email}">
+					                </div>
+					                <div class="form-group col-12">
+					                  <label class="control-label">Mobile 2</label>
+					                  <input class="form-control" type="text" placeholder="MOBILE 2" id="mobile2" th:field="*{mobile2}" th:value="${supplier.mobile2}">
+					                </div>
+		              			</div>
+		              			<div class="col-md-12 col-sm-12 row">
+		              				<div class="form-group col-12">
+										<label class="control-label">Address</label>
+				                  		<input class="form-control" type="text" placeholder="ADDRESS" id="address" th:field="*{address}" th:value="${supplier.address}">
+					                </div>
+				                </div>
+		              		</div>
+		              		
+			                <div class="form-group col-md-10 col-sm-12">
+			                  <label class="control-label">Status</label>
+			                  <div class="row border border-danger">
+							  	<div class="col-md-2 col-sm-12" th:each="sts : ${T(com.naizzbakers.bms.model.Supplier.STATUS).values()}">
+									<div class="form-check">
+					                	<label class="form-check-label">
+					                    	<input class="form-check-input" type="radio" th:field="*{status}" th:value="${sts}" name="status" th:disabled="${supplier.supplierId} == 0">
+					                    	<span th:text="${sts}"></span>
+					                    </label>
+					                </div>
+								</div>
+							  </div>
+			                </div>
+			                <div class="form-group col-md-6 col-sm-12">
+			                  <label class="control-label">Special Note</label>
+			                  <textarea class="form-control" rows="4" placeholder="SPECIAL NOTE" id="specialNote" th:field="*{specialNote}" th:value="${supplier.specialNote}"></textarea>
+			                </div>
+			                <div class="form-group col-md-6 col-sm-12 row">
+								<div class="col-md-6 col-sm-12">
+				                  <label class="control-label">CreateBy</label>
+				                  <input class="form-control" type="text" placeholder="CREATED BY" th:value="${supplier.createBy.firstName + ' ' + supplier.createBy.lastName}" disabled=""> 
+				                  <input type="text" th:field="*{createBy}" disabled="" hidden=""> 
+				                  <input type="text" id="createBy" th:value="${supplier.createBy.userId}" disabled="" hidden=""> 
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">Create Date</label>
+				                  <input class="form-control" type="text" placeholder="CREATED DATE" id="createDate" th:field="*{createDate}" th:value="${supplier.createDate}" disabled="">
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">UpdateBy</label>
+				                  <input class="form-control" type="text" placeholder="UPDATED BY" th:value="${supplier.createBy.firstName + ' ' + supplier.createBy.lastName}" disabled="">
+				                  <input type="text" th:field="*{updateBy}" disabled="" hidden="">
+				                  <input type="text" id="updateBy" th:value="${supplier.updateBy.userId}" disabled="" hidden="">
+				                </div>
+				                <div class="col-md-6 col-sm-12">
+				                  <label class="control-label">Update Date</label>
+				                  <input class="form-control" type="text" placeholder="UPDATED DATE" id="updateDate" th:field="*{updateDate}" th:value="${supplier.updateDate}" disabled="">
+				                </div>
+							</div>
+		              	</div>
+		            </div>
+				</form>
+				
+	            <div class="tile-footer">
+	              <button class="btn btn-primary" type="button" id="saveSupplier"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;
+	              <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	            </div>
+	          </div>
+	        </div>
+	        
+	    </main>	
+	</div>
+</body>
+</html>
+
+<script src="admin/js/supplier.management.js"></script>

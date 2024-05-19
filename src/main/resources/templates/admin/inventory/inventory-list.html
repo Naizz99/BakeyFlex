@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+  <title>Inventory Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-th-list"></i> Inventory Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item active"><a href="/listInventories">Inventory List</a></li>
+	        </ul>
+	      </div>
+	      <div class="row">
+	        <div class="col-md-12">
+	          <div class="tile">
+	            <h3 class="tile-title">
+					<!--Inventories-->
+	            	<a class="btn btn-primary" type="button" th:href="@{/addInventory}">Add New</a>
+	            </h3>
+	            <div class="table-responsive table-sm table-hover table-bordered">
+	              <table class="table">
+	                <thead>
+	                  <tr>
+	                    <th>Id</th>
+	                    <th>Sereial No.</th>
+	                    <th>Type</th>
+	                    <th>Name</th>
+	                    <th>Unit</th>
+	                    <th>Available Amount</th>
+	                    <th>Unit Price</th>
+	                    <th>First Ex. Date</th>
+	                    <th>Create Date</th>
+	                    <th>Status</th>
+	                    <th colspan="2">Action</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr th:each="inventory : ${listInventories}">
+	                  	<td th:text="${inventory.inventoryId != null} ? ${inventory.inventoryId} : '-'">-</td>
+	                  	<td th:text="${inventory.inventorySerial != null} ? ${inventory.inventorySerial} : '-'">-</td>
+	                  	<td th:text="${inventory.inventoryType.inventoryTypeName != null} ? ${inventory.inventoryType.inventoryTypeName} : '-'">-</td>
+	                  	<td th:text="${inventory.inventoryName != null} ? ${inventory.inventoryName} : '-'">-</td>
+	                  	<td th:text="${inventory.unitId.unit != null} ? ${inventory.unitId.unit} : '-'">-</td>
+	                  	<td th:text="${inventory.availableAmount != null} ? ${inventory.availableAmount} : '-'">-</td>
+	                  	<td th:text="${inventory.unitPrice != null} ? ${inventory.unitPrice} : '-'">-</td>
+	                  	<td th:text="${inventory.firstExDate != null} ? ${inventory.firstExDate} : '-'">-</td>
+	                  	<td th:text="${inventory.createDate != null} ? ${inventory.createDate} : '-'">-</td>
+	                  	<td th:text="${inventory.status != null} ? ${inventory.status} : '-'">-</td>
+	                  	<td th:onclick="|viewInventoryDetails('${inventory.inventoryId}',this)|">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>						
+						</td>
+						<td th:onclick="|deleteInventory('${inventory.inventoryId}',this)|">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> 
+						</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </main>	
+  	</div>
+</body>
+</html>
+
+<script src="admin/js/inventory.management.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

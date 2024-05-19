@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+  <title>Customer Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-th-list"></i> Customer Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item active"><a href="/listCustomers">Customer List</a></li>
+	        </ul>
+	      </div>
+	      <div class="row">
+	        <div class="col-md-12">
+	          <div class="tile">
+	            <h3 class="tile-title">
+					<!--Inventories-->
+	            	<a class="btn btn-primary" type="button" th:href="@{/addCustomer}">Add New</a>
+	            </h3>
+	            <div class="table-responsive table-sm table-hover table-bordered">
+	              <table class="table">
+	                <thead>
+	                  <tr>
+	                    <th>Id</th>
+	                    <th>Customer Code</th>
+	                    <th>Name</th>
+	                    <th>Mobile</th>
+	                    <th>Email</th>
+	                    <th>Gender</th>
+	                    <th>Birthday</th>
+	                    <th>Status</th>
+	                    <th colspan="2">Action</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr th:each="customer : ${listCustomers}">
+	                  	<td th:text="${customer.customerId != null} ? ${customer.customerId} : '-'">-</td>
+	                  	<td th:text="${customer.customerCode != null} ? ${customer.customerCode} : '-'">-</td>
+	                  	<td th:text="${customer.firstName != null} ? ${customer.firstName + customer.lastName} : '-'">-</td>
+	                  	<td th:text="${customer.mobile != null} ? ${customer.mobile} : '-'">-</td>
+	                  	<td th:text="${customer.email != null} ? ${customer.email} : '-'">-</td>
+	                  	<td th:text="${customer.gender != null} ? ${customer.gender} : '-'">-</td>
+	                  	<td th:text="${customer.birthDay != null} ? ${customer.birthDay} : '-'">-</td>
+	                  	<td th:text="${customer.status != null} ? ${customer.status} : '-'">-</td>
+	                  	<td th:onclick="|viewCustomerDetails('${customer.customerId}',this)|">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>						
+						</td>
+						<td th:onclick="|deleteCustomer('${customer.customerId}',this)|">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> 
+						</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </main>	
+  	</div>
+</body>
+</html>
+
+<script src="admin/js/customer.management.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/fragments/layout}">
+
+<head>
+  <title>Product Management</title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<main class="app-content">
+	      <div class="app-title">
+	        <div>
+	          <h1><i class="fa fa-th-list"></i> Product Management</h1>
+	        </div>
+	        <ul class="app-breadcrumb breadcrumb">
+	          <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home fa-lg"></i></a></li>
+	          <li class="breadcrumb-item"><a href="/listProducts">Product List</a></li>
+	          <li class="breadcrumb-item"><a href="/listProductTypes">Product Types</a></li>
+	        </ul>
+	      </div>
+	      <div class="row">
+			  <div class="col-lg-12 col-md-12 col-sm-12">
+	          
+		        <div class="col-md-12">
+		          <div class="tile">
+		            <h3 class="tile-title">
+		            	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productTypeModal"> Add New </button>
+		            </h3>
+		            <div class="table-responsive table-sm table-hover table-bordered">
+		              <table class="table">
+		                <thead>
+		                  <tr>
+							<th>ID</th>
+		                    <th>Product Type</th>
+		                    <th>Product Type Name</th>
+		                    <th>Description</th>
+		                    <th>Status</th>
+		                    <th colspan="2">Created</th>
+		                    <th colspan="2">Updated</th>
+		                    <th>Action</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr th:each="type : ${listProductTypes}">
+		                  	<td th:text="${type.ptId != null} ? ${type.ptId} : '-'">-</td>
+		                  	<td th:text="${type.productType != null} ? ${type.productType} : '-'">-</td>
+		                  	<td th:text="${type.productTypeName != null} ? ${type.productTypeName} : '-'">-</td>
+		                  	<td th:title="${type.description}" th:text="${type.description != null} ? ${#strings.substring(type.description,0,1)}+'....' : '-'">-</td>
+		                  	<td>
+							  <select class="form-control" th:value="${type.status}" th:data-ptId="${type.ptId}" th:data-status="${type.status}" onChange="productTypeStatusUpdate(this, this.getAttribute('data-ptId'), this.getAttribute('data-status'),this.value)">
+		                        <option th:each="sts : ${T(com.naizzbakers.bms.model.ProductType.STATUS).values()}"
+		                        	th:value="${sts}"
+		                            th:text="${sts}"
+		                            th:selected="${sts == type.status}">
+		                        </option>
+			                  </select>
+						  	</td>
+		                  	<td th:text="${type.createBy.userId != null} ? ${type.createBy.firstName + ' ' + type.createBy.lastName} : '-'">-</td>
+		                  	<td th:text="${type.createDate != null} ? ${type.createDate} : '-'">-</td>	                  	
+		                  	<td th:text="${type.updateBy.userId != null} ? ${type.updateBy.firstName + ' ' + type.updateBy.lastName} : '-'">-</td>
+		                  	<td th:text="${type.updateDate != null} ? ${type.updateDate} : '-'">-</td>
+		                  	
+							<td th:onclick="|deleteProductType('${type.ptId}',this)|">
+								<i class="fa fa-trash-o" aria-hidden="true"></i> 
+							</td>
+		                  </tr>
+		                </tbody>
+		              </table>
+		            </div>
+		          </div>
+		        </div>
+		        
+		        <div class="modal fade" id="productTypeModal" tabindex="-1" role="dialog" aria-labelledby="productTypeModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Product Type</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+						<form id = "newRequestForm">
+							<div class="tile-body">
+				            	<div class="row">
+									<input type="text" id="islId" hidden="" disabled="">
+				              		<div class="form-group col-md-2 col-sm-6">
+					                  <label class="control-label">ID</label>
+					                  <input class="form-control" type="text" value="0" placeholder="TYPE ID" id="ptId" disabled="">
+					                </div>
+					                <div class="form-group col-md-4 col-sm-6">
+					                  <label class="control-label">Product Type</label>
+					                  <input class="form-control" type="text" placeholder="PRODUCT TYPE" id="productType">
+					                </div>
+					                <div class="form-group col-md-6 col-sm-12">
+					                  <label class="control-label">Product Type Name</label>
+					                  <input class="form-control" type="text" placeholder="PRODUCT TYPE NAME" id="productTypeName">
+					                </div>
+					                <div class="form-group col-md-9 col-sm-12">
+					                  <label class="control-label">Description</label>
+					                  <textarea class="form-control" rows="4" placeholder="DESCRIPTION" id="description"></textarea>
+					                </div>
+					                <div class="form-group col-md-3 col-sm-12">
+					                  <label class="control-label">Status</label>
+					                  <div class="row border border-danger">
+									  	<div class="col-md-12 col-sm-12" th:each="sts : ${T(com.naizzbakers.bms.model.ProductType.STATUS).values()}">
+											<div class="form-check">
+							                	<label class="form-check-label">
+							                    	<input class="form-check-input" type="radio" th:value="${sts}" name="status">
+							                    	<span th:text="${sts}"></span>
+							                    </label>
+							                </div>
+										</div>
+									  </div>
+					                </div>
+					                <div class="form-group col-md-6 col-sm-12">
+					                  <label class="control-label">Create By</label>
+					                  <input type="text" class="form-control" placeholder="CREATE BY" id="createBy" disabled="">
+					                </div>
+					                <div class="form-group col-md-6 col-sm-12">
+					                  <label class="control-label">Created</label>
+					                  <input type="text" class="form-control" placeholder="CREATE DATE" id="createDate" disabled="">
+					                </div>
+					                <div class="form-group col-md-6 col-sm-12">
+					                  <label class="control-label">Update By</label>
+					                  <input type="text" class="form-control" placeholder="UPDATE BY" id="updateBy" disabled="">
+					                </div>
+					                <div class="form-group col-md-6 col-sm-12">
+					                  <label class="control-label">Updated</label>
+					                  <input type="text" class="form-control" placeholder="UPDATE DATE" id="updateDate" disabled="">
+					                </div>
+				              	</div>
+				            </div>
+						</form>	
+				      </div>
+				      
+				      <div class="modal-footer">
+				        <button class="btn btn-primary" type="button" id="saveProductType"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;
+		              	<a class="btn btn-secondary" href="#" data-dismiss="modal" aria-label="Close"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+				      </div>
+				      	            
+				    </div>
+				  </div>
+				</div>
+				
+		      </div>
+	    </main>	
+  	</div>
+</body>
+</html>
+
+<script src="admin/js/product.management.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
